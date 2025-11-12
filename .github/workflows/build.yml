@@ -1,0 +1,43 @@
+name: Java CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v5
+    - name: Set up JDK 25
+      uses: actions/setup-java@v5
+      with:
+        java-version: '25'
+        distribution: 'temurin'
+    - name: Build and test with Maven
+      run: mvn --batch-mode --update-snapshots clean verify
+    - name: Get Project Info
+      id: project
+      run: |
+        echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
+        echo "ARTIFACT_ID=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)" >> $GITHUB_OUTPUT
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v5
+      with:
+        name: karunsblog-simple-java-calculator-agent-using-google-adk
+        path: target/${{ steps.project.outputs.ARTIFACT_ID }}-${{ steps.project.outputs.VERSION }}.jar
+    - name: Upload Javadoc
+      uses: actions/upload-artifact@v5
+      with:
+        name: karunsblog-simple-java-calculator-agent-using-google-adk-javadoc
+        path: target/${{ steps.project.outputs.ARTIFACT_ID }}-${{ steps.project.outputs.VERSION }}-javadoc.jar
+    - name: Upload Sources
+      uses: actions/upload-artifact@v5
+      with:
+        name: karunsblog-simple-java-calculator-agent-using-google-adk-sources
+        path: target/${{ steps.project.outputs.ARTIFACT_ID }}-${{ steps.project.outputs.VERSION }}-sources.jar
