@@ -29,8 +29,8 @@ This project demonstrates a simple calculator agent built using the Google Agent
 
 1.  **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/GoogleADK-CalculatorAgent.git
-    cd GoogleADK-CalculatorAgent
+    git clone https://github.com/kdambiec/simple-java-calculator-agent-using-google-adk.git
+    cd simple-java-calculator-agent-using-google-adk
     ```
 
 2.  **Configure Google Cloud Authentication**:
@@ -45,13 +45,9 @@ This project demonstrates a simple calculator agent built using the Google Agent
 
 ## Usage
 
-To run the calculator agent, execute the `main` method in `CalculatorAgent.java`:
+To run the calculator agent refer to the following blog article: https://www.karunsblog.com/building-a-simple-calculator-agent-in-java-with-the-google-adk-and-gemini/
 
-```bash
-mvn exec:java -Dexec.mainClass="karunsblog.agents.calculator.CalculatorAgent"
-```
-
-Once the agent is running, you can interact with it through the console:
+Once the agent is running, you can interact with it through the web UI:
 
 ```
 You > What is 5 plus 3?
